@@ -14,7 +14,17 @@ img{
   height:250px;
 }
 mat-paginator{
-  position: sticky;
+  /* display: flex; */
+  /* position: sticky; */
+  background-color:#FAEBD7;
+}
+.main{
+  height: 100%;
+  width:100%;
+}
+.mat{
+  display: flex;
+  position: sticky
 }
 
 :host {

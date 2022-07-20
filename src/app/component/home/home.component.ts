@@ -32,10 +32,11 @@ export class HomeComponent implements OnInit {
   tempData: any = [];
   dataSource:any;
   num=5;
-  pageSizeOptions: number[] = [5, 10, 15, 20];
+  pageSizeOptions: number[] = [30,5, 10,20];
 productsList: any
   pagedList: any
   breakpoint: number = 3; 
+  pageevent=false
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild('scrollContainer') private scrollContainer: ElementRef;
   scrolls: any;
@@ -43,12 +44,6 @@ productsList: any
   sum=100;
 array=[]
   constructor(private home: HomeService, public dialog: MatDialog,private renderer2: Renderer2) {
-    // this.onWindowScroll()
-   
-// 
-
-
-
   }
   getYPosition(e: Event): number {
     return (e.target as Element).scrollTop;
@@ -60,12 +55,11 @@ array=[]
       this.personDetail= data;
       console.log(this.personDetail);
       this.dataSource=data.products
-      // this.dataSource.paginator = this.paginator;
+      this.dataSource.paginator = this.paginator;
       console.log(this.dataSource)
       this.pagedList = this.dataSource.slice(0, this.num);
-      this.length = this.dataSource.length;
      
-     
+  
     });
     
   }
@@ -75,21 +69,35 @@ array=[]
   if(( elem.offsetHeight + elem.scrollTop) >=  elem.scrollHeight-50) {
     
      console.log("It's Lit");
-     this.num=this.num+5
-     this.pagedList = this.dataSource.slice(0, this.num);
+     
+     if(this.pageevent){
+      this.pagedList = this.dataSource.slice(0, this.num);
+     }else{
+      this.num=this.num+5
+      this.pagedList = this.dataSource.slice(0, this.num);
+     }
+     this.pageevent=false
     //  this.pageSizeOptions=[this.num,this.num+5,this.num+5]
-     this.dataSource.paginator = this.paginator;
-     this.length= this.pagedList.length()
+    
+     this.length= this.pagedList.length
+    //  this.pagedList.paginator = this.paginator;
+     this.pageSizeOptions.push(this.length)
+     
      
   }
 }
-ngAfterViewInit(): void{
+ngOnChanges(): void{
   this.pagedList
+  this.length
   
   // this.pageSizeOptions=[this.num,this.num+5,this.num+5]
 }
 
+
   OnPageChange(event: PageEvent){
+    this.pageevent=true
+    this.num=event.pageSize;
+    // this.pageevent=true
     let startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
     if(endIndex > this.length){
@@ -97,6 +105,9 @@ ngAfterViewInit(): void{
     }
     this.pagedList = this.dataSource.slice(startIndex, endIndex);
   }
+
+
+  
 
 
 
