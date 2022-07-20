@@ -1,0 +1,31 @@
+
+<div class="container"  infinite-scroll
+>
+
+  
+<div class="matcardsclass" >
+  <mat-grid-list  [cols]="breakpoint" rowHeight="4:5" >
+    <mat-grid-tile *ngFor="let items of pagedList">
+      <mat-card class="example-card matgridlist" >
+   
+        <mat-card-header>
+          <mat-card-title>{{items.brand}}</mat-card-title>
+          
+        </mat-card-header>
+        <img src={{items.images[0]}}>
+        <!-- <img *ngIf="items.images[1]==''"src={{items.images[2]}}> -->
+        
+        <mat-card-title>{{items.title}}</mat-card-title>
+       
+      </mat-card>
+    </mat-grid-tile>
+  
+</mat-grid-list>
+  <mat-paginator [length]="length"
+  [pageSize]="pageSize"
+  
+  (page)="OnPageChange($event)">
+  </mat-paginator>
+
+</div>
+</div>

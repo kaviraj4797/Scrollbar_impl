@@ -1,0 +1,46 @@
+
+.container{
+  background-color:#FAEBD7;
+  position: sticky;
+  width:800px;
+  /* display: flex; */
+  margin: auto;
+  /* width: 60%; */
+  /* border: 3px solid #73AD21; */
+  padding: 10px;
+}
+img{
+  width:250px;
+  height:250px;
+}
+mat-paginator{
+  position: sticky;
+}
+
+:host {
+  display: block;
+  max-height: 700px;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+}
+
+.example-card {
+  max-width: 400px;
+  margin:30px;
+}
+
+.matgridlist{
+  background-color:aqua;
+  width:700px;
+  height:400px;
+  margin:20px;
+  border-radius: 100px;;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+
+
